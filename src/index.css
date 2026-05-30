@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Light mode (only mode) ───────────────────────────────────────────── */
+:root {
+  --color-bg:           #f4f5f7;
+  --color-bg-card:      #ffffff;
+  --color-bg-elevated:  #ebedf0;
+  --color-bg-mid:       #e4e6ea;
+  --color-nav-bg:       rgba(255,255,255,0.95);
+  --color-text:         #0d1b3e;
+  --color-text-sub:     #374151;
+  --color-text-muted:   #6b7280;
+  --color-border:       rgba(160,136,32,0.22);
+  --color-section-div:  rgba(0,0,0,0.07);
+  --color-input-bg:     #ffffff;
+  --color-input-border: #d1d5db;
+  --shadow-card:        0 1px 3px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  --color-gold:         #A08820;
+  --color-gold-cta:     #D4AF37;
+}
+
+/* ─── Base ────────────────────────────────────────────────────────────── */
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Oswald", sans-serif;
+    color: var(--color-text);
+  }
+}
+
+/* ─── Utilities ───────────────────────────────────────────────────────── */
+@layer utilities {
+  .gold-gradient {
+    background: linear-gradient(135deg, #C49A20 0%, #8A6E10 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-divider {
+    border-top: 1px solid var(--color-section-div);
+  }
+
+  .card-border {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 30px rgba(160, 136, 32, 0.12);
+  }
+
+  .theme-bg        { background-color: var(--color-bg); }
+  .theme-bg-card   { background-color: var(--color-bg-card); }
+  .theme-bg-mid    { background-color: var(--color-bg-mid); }
+  .theme-text      { color: var(--color-text); }
+  .theme-text-sub  { color: var(--color-text-sub); }
+  .theme-text-muted { color: var(--color-text-muted); }
+}
