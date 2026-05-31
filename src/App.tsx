@@ -19,8 +19,8 @@ import {
 
 
 // ─── Config — update these before deploying ────────────────────────────────
-const APP_URL = "https://rstriq.com";
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const APP_URL = "https://portal.rstriq.com";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqejolgb";
 const CONTACT = {
   peyton: { name: "Peyton Beard", email: "peyton.beard@rstriq.com" },
   trevor: { name: "Trevor Powers", email: "trevor.powers@rstriq.com" },
