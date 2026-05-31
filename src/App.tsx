@@ -32,7 +32,7 @@ const FEATURES = [
     icon: Database,
     title: "Program-Specific Projections",
     description:
-      "Every D1 player's projected stats (pAVG, pOBP, pSLG, pISO, wRC+, oWAR) precomputed for your program before you open the page. Your park, your conference, your numbers.",
+      "Every D1 player's projected stats precomputed for your program before you open the page. Your park, your conference, your numbers.",
   },
   {
     icon: TrendingUp,
@@ -354,9 +354,9 @@ function Problem() {
         </h2>
         <p className="text-xl leading-relaxed" style={{ color: "var(--color-text-sub)" }}>
           College baseball programs are making six-figure roster decisions
-          (class transitions, portal targets, depth allocation) on gut feel,
-          film, and word of mouth. The transfer window moves fast and the top
-          players are off the board before the manual process catches up.
+          on gut feel, film, and word of mouth. The transfer window moves fast
+          and the top players are off the board before the manual process
+          catches up.
         </p>
       </div>
     </section>
