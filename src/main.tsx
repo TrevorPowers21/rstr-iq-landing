@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Analytics } from "@vercel/analytics/react";
 import "./index.css";
 import App from "./App";
 import InvestorPreview from "./InvestorPreview";
@@ -10,5 +11,14 @@ import InvestorPreview from "./InvestorPreview";
 const isInvestorPreview = window.location.pathname === "/preview/gv3k9m2p";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>{isInvestorPreview ? <InvestorPreview /> : <App />}</StrictMode>,
+  <StrictMode>
+    {isInvestorPreview ? (
+      <InvestorPreview />
+    ) : (
+      <>
+        <App />
+        <Analytics />
+      </>
+    )}
+  </StrictMode>,
 );
