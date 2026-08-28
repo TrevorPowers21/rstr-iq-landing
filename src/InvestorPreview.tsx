@@ -57,7 +57,13 @@ export default function InvestorPreview() {
   };
 
   return (
-    <div className="min-h-screen bg-navy flex items-center justify-center p-4">
+    <div
+      className="min-h-screen bg-navy flex items-center justify-center p-4"
+      style={{
+        paddingTop: "max(1rem, env(safe-area-inset-top))",
+        paddingBottom: "max(1rem, env(safe-area-inset-bottom))",
+      }}
+    >
       <div className="w-full max-w-2xl">
         <div className="flex justify-center mb-8">
           <img src="/rstr-iq-logo.png" alt="RSTR IQ" className="h-10 w-auto" />
@@ -112,6 +118,9 @@ export default function InvestorPreview() {
           </div>
         ) : (
           <div className="bg-navy-light/60 border border-gold-muted rounded-2xl p-4 sm:p-6">
+            {/* aspect-ratio reserves the video's footprint up front so the
+                page doesn't jump once the (80MB) file finishes loading —
+                most noticeable on mobile/cellular. */}
             <video
               src={VIDEO_SRC}
               controls
@@ -121,9 +130,13 @@ export default function InvestorPreview() {
               onContextMenu={(e) => e.preventDefault()}
               poster="/screen-overview.png"
               className="w-full rounded-lg"
+              style={{ aspectRatio: "16 / 9" }}
             >
               Your browser doesn't support embedded video.
             </video>
+            <p className="sm:hidden font-body text-xs text-white/40 text-center mt-3">
+              Tip: tap the fullscreen icon and rotate your phone for the best view
+            </p>
           </div>
         )}
       </div>
