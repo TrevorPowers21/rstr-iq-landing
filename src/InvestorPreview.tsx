@@ -1,4 +1,5 @@
 import { useState, FormEvent, useEffect } from "react";
+import posthog from "posthog-js";
 
 // Hidden, unlisted page — not linked from nav or sitemap. Reachable only by
 // direct URL (see main.tsx for the route match). Gate is a simple
@@ -8,6 +9,14 @@ import { useState, FormEvent, useEffect } from "react";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqejolgb";
 const UNLOCK_KEY = "rstr-iq-investor-preview-unlocked";
 const VIDEO_SRC = "/videos/investor-preview.mp4";
+
+// Same PostHog project the coach app (portal.rstriq.com) already uses —
+// this is a public client key, safe to reuse, and gives one unified view
+// of "who watched the investor preview" instead of a second disconnected
+// PostHog project just for this page.
+const POSTHOG_KEY = "phc_ydv5C8EDahk8FRm8JeWMjz3jjZMS5frPgcQmNYE58gHn";
+const POSTHOG_HOST = "https://us.i.posthog.com";
+posthog.init(POSTHOG_KEY, { api_host: POSTHOG_HOST, person_profiles: "always", capture_pageview: false });
 
 export default function InvestorPreview() {
   const [unlocked, setUnlocked] = useState(false);
@@ -36,6 +45,8 @@ export default function InvestorPreview() {
         }),
       });
       if (!res.ok) throw new Error("Could not verify — try again.");
+      posthog.identify(email, { email, name });
+      posthog.capture("investor_preview_unlocked", { name, email });
       sessionStorage.setItem(UNLOCK_KEY, "true");
       setUnlocked(true);
     } catch {
