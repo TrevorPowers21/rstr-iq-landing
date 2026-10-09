@@ -1,4 +1,4 @@
-import { useState, FormEvent, useEffect, useRef } from "react";
+import { useState, FormEvent } from "react";
 import {
   BarChart3,
   TrendingUp,
@@ -13,7 +13,9 @@ import {
   DollarSign,
   Database,
   Shield,
-  ChevronLeft,
+  Users,
+  ClipboardList,
+  Target,
 } from "lucide-react";
 
 
@@ -27,240 +29,226 @@ const CONTACT = {
 };
 
 // ─── Data ───────────────────────────────────────────────────────────────────
-const FEATURES = [
-  {
-    icon: Database,
-    title: "Program-Specific Projections",
-    description:
-      "Every D1 player's projected stats precomputed for your program before you open the page. Your park, your conference, your numbers.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Transfer Portal Simulator",
-    description:
-      "Project any D1 or JUCO player at any destination, with handedness-aware park factors, district-specific JUCO weights, and daily portal updates.",
-  },
-  {
-    icon: DollarSign,
-    title: "Market Valuations",
-    description:
-      "Automated market values tied to projected WAR, conference tier, position scarcity, and depth role. Know what a player is worth at your school specifically.",
-  },
-  {
-    icon: BarChart3,
-    title: "Team Builder",
-    description:
-      "Build your 2027 roster slot by slot and benchmark aggregate oWAR and pWAR against 2025 conference and national champions.",
-  },
-  {
-    icon: Activity,
-    title: "Live Portal Intelligence",
-    description:
-      "Portal entries flow in daily with status badges, contact info (phone, email, GPA, athletic aid), and a prioritized activity feed for players you're watching.",
-  },
-  {
-    icon: FileText,
-    title: "Detailed Scouting Reports",
-    description:
-      "Data-driven archetype classification for every eligible D1 player with full prose reports that translate the numbers into baseball language your staff can act on.",
-  },
-];
-
 const HOW_IT_WORKS = [
   {
     step: "01",
     title: "Your program gets onboarded",
     description:
-      "Once your program is set up, every D1 and JUCO player is precomputed for your park, conference, and market.",
+      "Once your program is set up, every player is projected for your program and every roster decision, player, and dollar is tracked in one place.",
   },
   {
     step: "02",
-    title: "Open and read. No filters to set.",
+    title: "Open and get to work.",
     description:
-      "Every dashboard, profile, and exported PDF shows what each player would do at your school. Same number every time.",
+      "Every dashboard is set up for your staff to make the best roster decisions and build the right development plan for every player.",
   },
   {
     step: "03",
-    title: "Build rosters. Track targets. Set the budget.",
+    title: "Build rosters. Develop talent. Win.",
     description:
-      "Run Team Builder scenarios against championship benchmarks, follow portal targets in a click, and export scouting sheets with your numbers baked in.",
+      "Build your roster against championship benchmarks, develop every player with lab-level insights and post-game reports, and prepare for every opponent.",
   },
 ];
 
 const METRICS = [
-  { label: "D1 + JUCO Players Tracked", value: "15,000+" },
-  { label: "Scouting Metrics Per Player", value: "20+" },
+  { label: "Players Tracked", value: "15,000+" },
+  { label: "Metrics Per Player", value: "20+" },
   { label: "Data Refresh", value: "Daily" },
-  { label: "Destinations Modeled", value: "Every D1" },
+  { label: "Interface for Every Roster Decision", value: "One" },
 ];
 
-// ─── Screenshot Slides ────────────────────────────────────────────────────
+// ─── Workflows ─────────────────────────────────────────────────────────────
 
-const SLIDES = [
+const WORKFLOW_GROUPS = [
   {
-    label: "Overview",
-    sub: "Morning briefing, recent portal activity, and top hitters and pitchers ranked for your program",
-    img: "/screen-overview.png",
-    url: "rstriq.com/dashboard",
+    key: "identify",
+    label: "Identify",
+    summary: "Find the right players for your program before anyone else does.",
+    items: [
+      {
+        icon: Database,
+        title: "Player Dashboard",
+        description:
+          "Every player projected and valued at your program, sortable by any stat.",
+        bullets: [
+          "Projections precomputed for your park and conference",
+          "Hitters and pitchers ranked for your program",
+          "Projected stats for every hitter and pitcher",
+        ],
+      },
+      {
+        icon: Activity,
+        title: "Transfer Portal",
+        description:
+          "Portal entries flow in daily, and any player can be projected at your school in a click.",
+        bullets: [
+          "Daily portal updates with status badges",
+          "Contact info, GPA, and athletic aid in one place",
+          "Activity feed for the players you're watching",
+        ],
+      },
+      {
+        icon: Users,
+        title: "Freshman Recruiting",
+        description:
+          "A recruiting board for high school prospects, built on the same data your portal targets use.",
+        bullets: [
+          "Recruit board shared across your staff",
+          "Showcase and event data measured against D1 standards",
+          "Path to productivity by class year",
+        ],
+      },
+      {
+        icon: DollarSign,
+        title: "Financial Management",
+        description:
+          "Organize where your money is going and make sure it's on the right players.",
+        bullets: [
+          "Financial organization by source",
+          "Roster budget tracked as you build",
+        ],
+      },
+    ],
   },
   {
-    label: "Player Dashboard",
-    sub: "Every D1 and JUCO player projected and valued at your destination — sortable by any stat",
-    img: "/screen-player-dashboard.png",
-    url: "rstriq.com/dashboard/returning",
+    key: "develop",
+    label: "Develop",
+    summary: "Help the players you have reach their ceiling.",
+    items: [
+      {
+        icon: TrendingUp,
+        title: "Player Development",
+        description:
+          "Track each player's progress against D1 benchmarks, with practice data your program owns.",
+        bullets: [
+          "Practice data in a program-owned database",
+          "Progress measured against D1 percentiles",
+          "Development goals tied to projected value",
+        ],
+      },
+      {
+        icon: ClipboardList,
+        title: "Post-Game Reports",
+        description:
+          "Every game broken down pitch by pitch, ready for your staff the next morning.",
+        bullets: [
+          "Game log and scoreboard for every game",
+          "Hitter and pitcher breakdowns",
+          "Coach and player reports ready to export",
+        ],
+      },
+      {
+        icon: Target,
+        title: "Lab-Level Insights",
+        description:
+          "Lab-level breakdowns for every pitcher and hitter, showing exactly where each player can get better.",
+        bullets: [
+          "Pitch shape and arsenal breakdowns",
+          "Swing decisions and batted-ball quality",
+          "Trends over time against D1 benchmarks",
+        ],
+      },
+    ],
   },
   {
-    label: "Transfer Portal",
-    sub: "Simulate any player transfer to your program with handedness-aware park factors and JUCO support",
-    img: "/screen-portal.png",
-    url: "rstriq.com/dashboard/portal",
-  },
-  {
-    label: "Team Builder",
-    sub: "Build your 2027 roster, track roster budget, and benchmark your build against champions",
-    img: "/screen-teambuilder.png",
-    url: "rstriq.com/dashboard/team-builder",
-  },
-  {
-    label: "Player Profile",
-    sub: "Full projection, scouting grades, career stats, and risk assessment — precomputed for your school",
-    img: "/screen-player.png",
-    url: "rstriq.com/dashboard/player",
+    key: "win",
+    label: "Win",
+    summary: "Build the roster, prepare for every opponent, and maximize the development of your whole roster.",
+    items: [
+      {
+        icon: BarChart3,
+        title: "Team Builder",
+        description:
+          "Plan next year's roster slot by slot, set your depth, and see how it stacks up before you commit.",
+        bullets: [
+          "Roster scenarios built slot by slot",
+          "Depth charts and roster needs by position",
+          "Benchmarks against conference and national champions",
+        ],
+      },
+      {
+        icon: FileText,
+        title: "Scouting Reports",
+        description:
+          "Prepare for every opponent with reports on their lineup and pitching staff.",
+        bullets: [
+          "Opponent lineup and pitching staff breakdowns",
+          "Built for your staff and your players",
+          "Ready to export before every series",
+        ],
+      },
+    ],
   },
 ];
 
-function ScreenShot({ img, url }: { img: string; url: string }) {
-  return (
-    <div className="relative">
-      <div className="absolute inset-0 bg-gold/8 blur-3xl rounded-full scale-75 pointer-events-none" />
-      <div className="relative rounded-xl overflow-hidden border border-gold/20 shadow-2xl shadow-black/70">
-        {/* Browser chrome */}
-        <div
-          className="flex items-center gap-3 px-4 py-3 border-b border-white/5"
-          style={{ background: "#0a0f1e" }}
-        >
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/60" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-            <div className="w-3 h-3 rounded-full bg-green-500/60" />
-          </div>
-          <div className="flex-1 bg-white/5 rounded text-center text-xs text-slate-500 py-1 px-3 truncate">
-            {url}
-          </div>
-          <div className="w-16" />
-        </div>
-        {/* Real screenshot */}
-        <img
-          src={img}
-          alt={url}
-          className="w-full block"
-          style={{ display: "block", maxHeight: 520, objectFit: "cover", objectPosition: "top" }}
-        />
-      </div>
-    </div>
-  );
-}
-
-
-
-function ScreenshotCarousel() {
+function Workflows() {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const advance = (dir: 1 | -1) => {
-    setActive((prev) => (prev + dir + SLIDES.length) % SLIDES.length);
-  };
-
-  useEffect(() => {
-    if (paused) return;
-    timerRef.current = setInterval(() => advance(1), 4000);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [paused, active]);
-
-  const slide = SLIDES[active];
+  const group = WORKFLOW_GROUPS[active];
 
   return (
     <section className="py-28 section-divider theme-bg" id="platform">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="font-heading text-5xl sm:text-6xl font-bold mb-4">
-            See the platform in action.
+        <div className="max-w-4xl mx-auto text-center mb-14">
+          <h2 className="font-heading text-5xl sm:text-6xl font-bold mb-8">
+            Roster decisions don't have time to wait on a spreadsheet.
           </h2>
-          <p className="text-xl max-w-xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
-            Every screen your staff needs, built around the decisions that matter.
+          <p className="text-xl leading-relaxed text-balance" style={{ color: "var(--color-text-sub)" }}>
+            College baseball programs are making six-figure roster decisions
+            on gut feel, film, and word of mouth. Who to chase, how to develop
+            them, and building a roster that wins. The decisions never stop,
+            and the best programs make them fastest.
           </p>
         </div>
 
-        {/* Tab nav */}
-        <div className="flex justify-center gap-2 mb-10 flex-wrap">
-          {SLIDES.map((s, i) => (
-            <button
-              key={s.label}
-              onClick={() => { setActive(i); setPaused(true); }}
-              className={`font-heading text-sm font-medium px-5 py-2.5 rounded-full tracking-wide transition-all duration-200 ${
-                i === active
-                  ? "bg-navy text-white"
-                  : "border border-gold/20 text-slate-500 hover:text-gold-dark hover:border-gold/40"
-              }`}
-            >
-              {s.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Screenshot */}
-        <div
-          className="relative max-w-5xl mx-auto"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          <div className="pointer-events-none absolute inset-0 bg-gold/6 blur-3xl rounded-full scale-75" />
-
-          <div className="relative transition-opacity duration-300">
-            <ScreenShot img={slide.img} url={slide.url} />
-          </div>
-
-          {/* Prev / Next arrows */}
-          <button
-            onClick={() => { advance(-1); setPaused(true); }}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-14 w-10 h-10 rounded-full border border-navy/20 flex items-center justify-center text-navy hover:bg-navy/10 transition-colors duration-200"
-          >
-            <ChevronLeft size={18} />
-          </button>
-          <button
-            onClick={() => { advance(1); setPaused(true); }}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-14 w-10 h-10 rounded-full border border-navy/20 flex items-center justify-center text-navy hover:bg-navy/10 transition-colors duration-200"
-          >
-            <ChevronRight size={18} />
-          </button>
-        </div>
-
-        {/* Caption + dots */}
-        <div className="text-center mt-8">
-          <p className="font-heading text-xl font-semibold mb-1 tracking-wide" style={{ color: "var(--color-text)" }}>
-            {SLIDES[active].label}
-          </p>
-          <p className="text-base mb-6" style={{ color: "var(--color-text-muted)" }}>{SLIDES[active].sub}</p>
-          <div className="flex justify-center gap-2">
-            {SLIDES.map((_, i) => (
+        {/* Selector */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex rounded-full border p-1.5" style={{ borderColor: "var(--color-border)", background: "var(--color-bg-card)" }}>
+            {WORKFLOW_GROUPS.map((g, i) => (
               <button
-                key={i}
-                onClick={() => { setActive(i); setPaused(true); }}
-                className={`rounded-full transition-all duration-300 ${
-                  i === active ? "w-8 h-2 bg-navy" : "w-2 h-2 bg-navy/20 hover:bg-navy/40"
+                key={g.key}
+                onClick={() => setActive(i)}
+                className={`font-heading text-base sm:text-lg font-semibold uppercase tracking-[0.15em] px-5 sm:px-8 py-2.5 rounded-full transition-colors duration-200 ${
+                  i === active ? "bg-navy text-white" : "text-slate-500 hover:text-gold-dark"
                 }`}
-              />
+              >
+                {g.label}
+              </button>
             ))}
           </div>
+        </div>
+        <p className="text-center text-lg mb-12" style={{ color: "var(--color-text-muted)" }}>
+          {group.summary}
+        </p>
+
+        {/* Workflow cards */}
+        <div className={`grid gap-6 mx-auto md:grid-cols-2 ${group.items.length === 3 ? "lg:grid-cols-3 max-w-6xl" : "max-w-5xl"}`}>
+          {group.items.map((item) => (
+            <div key={item.title} className="card-border rounded-lg p-8 text-left">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded flex items-center justify-center" style={{ background: "rgba(160,136,32,0.1)" }}>
+                  <item.icon size={20} style={{ color: "var(--color-gold)" }} />
+                </div>
+                <h3 className="font-heading text-2xl font-semibold">{item.title}</h3>
+              </div>
+              <p className="text-base leading-relaxed mb-5" style={{ color: "var(--color-text-sub)" }}>
+                {item.description}
+              </p>
+              <ul className="space-y-2">
+                {item.bullets.map((b) => (
+                  <li key={b} className="flex items-start gap-2 text-sm" style={{ color: "var(--color-text-sub)" }}>
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: "var(--color-gold)" }} />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-
-// ─── Components ─────────────────────────────────────────────────────────────
 function Nav() {
   return (
     <nav
@@ -268,20 +256,23 @@ function Nav() {
       style={{ background: "var(--color-nav-bg)", borderColor: "var(--color-section-div)" }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <img src="/rstr-iq-logo.png" alt="RSTR IQ" className="h-8 w-auto" style={{ filter: "brightness(0) saturate(100%) invert(4%) sepia(98%) saturate(1167%) hue-rotate(207deg)" }} />
+        <a href="#" className="shrink-0" aria-label="RSTR IQ home">
+          {/* Trimmed copy of rstr-iq-logo.png: the original has ~30% empty space on the right */}
+          <img src="/rstr-iq-logo-trim.png" alt="RSTR IQ" className="h-12 sm:h-16 w-auto" style={{ filter: "brightness(0) saturate(100%) invert(4%) sepia(98%) saturate(1167%) hue-rotate(207deg)" }} />
+        </a>
         <div className="flex items-center gap-3">
           <a
             href={APP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm hover:text-gold-dark transition-colors duration-200 flex items-center gap-1"
+            className="hidden sm:flex text-sm hover:text-gold-dark transition-colors duration-200 items-center gap-1"
             style={{ color: "var(--color-text-muted)" }}
           >
             Access the App <ExternalLink size={13} className="opacity-70" />
           </a>
           <a
             href="#contact"
-            className="text-sm font-medium bg-navy text-white px-4 py-2 rounded hover:bg-navy-light transition-colors duration-200"
+            className="text-sm font-medium bg-navy text-white px-4 py-2 rounded hover:bg-navy-light transition-colors duration-200 whitespace-nowrap"
           >
             Request a Demo
           </a>
@@ -290,6 +281,16 @@ function Nav() {
     </nav>
   );
 }
+
+// Square marks get more height than wide wordmarks so they read at equal weight.
+const CONFERENCES = [
+  { name: "SEC", logo: "/conferences/sec.svg", height: "h-14" },
+  { name: "The Summit League", logo: "/conferences/summit.svg", height: "h-12" },
+  { name: "Big Ten", logo: "/conferences/big-ten.svg", height: "h-9" },
+  { name: "American Athletic Conference", logo: "/conferences/american.svg", height: "h-14" },
+  { name: "ACC", logo: "/conferences/acc.svg", height: "h-8" },
+  { name: "Pac-12", logo: "/conferences/pac-12.svg", height: "h-14" },
+];
 
 function Hero() {
   return (
@@ -305,26 +306,45 @@ function Hero() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(160,136,32,0.06)" }} />
 
       <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
-        <div className="inline-flex items-center gap-2 border px-4 py-2 rounded-full mb-8 tracking-wider uppercase text-sm font-medium" style={{ background: "rgba(160,136,32,0.1)", borderColor: "rgba(160,136,32,0.25)", color: "#A08820" }}>
-          <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-          Trusted by D1 Programs
-        </div>
-
-        <h1 className="font-heading text-5xl sm:text-6xl lg:text-8xl font-bold leading-tight mb-6" style={{ color: "var(--color-text)" }}>
-          The Roster Intelligence
+        <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-10" style={{ color: "var(--color-text)" }}>
+          The Roster Intelligence Platform
           <br />
-          <span className="gold-gradient">Platform Built for</span>
-          <br />
-          College Baseball
+          <span className="gold-gradient">Built for College Baseball</span>
         </h1>
 
-        <p className="text-xl sm:text-2xl max-w-3xl mx-auto mb-14 leading-relaxed" style={{ color: "var(--color-text-sub)" }}>
-          Data-driven projections, market valuations, and transfer portal
-          intelligence for every D1 and JUCO player, precomputed for your
-          program before you open the page. No simulator step. No manual imports.
+        <div className="flex items-center justify-center gap-3 sm:gap-6 mb-6">
+          <span className="h-px w-6 sm:w-20" style={{ background: "var(--color-text)" }} />
+          <p className="font-heading text-base sm:text-2xl font-semibold uppercase tracking-[0.18em] sm:tracking-[0.3em] whitespace-nowrap" style={{ color: "var(--color-text)" }}>
+            Identify. Develop. Win.
+          </p>
+          <span className="h-px w-6 sm:w-20" style={{ background: "var(--color-text)" }} />
+        </div>
+
+        <p className="text-xl sm:text-2xl max-w-3xl mx-auto mb-14 leading-relaxed text-balance" style={{ color: "var(--color-text-sub)" }}>
+          Data-driven projections to find the best players for your program,
+          market valuations so every dollar goes to the right player, and
+          player development tools to help them reach their ceiling. All in
+          one interface.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div>
+          <p className="text-sm font-medium tracking-wider uppercase mb-8" style={{ color: "var(--color-text-muted)" }}>
+            Proud to be represented in
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16">
+            {CONFERENCES.map((c) => (
+              <img
+                key={c.name}
+                src={c.logo}
+                alt={c.name}
+                title={c.name}
+                className={`${c.height} w-auto`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#contact"
             className="inline-flex items-center justify-center gap-2 bg-navy text-white font-heading font-semibold text-xl px-10 py-5 rounded hover:bg-navy-light transition-colors duration-200 tracking-wide"
@@ -345,66 +365,20 @@ function Hero() {
   );
 }
 
-function Problem() {
+function MetricsBar() {
   return (
-    <section className="py-28 max-w-7xl mx-auto px-6 theme-bg">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-heading text-5xl sm:text-6xl font-bold mb-8">
-          Roster decisions don't have time to wait on a spreadsheet.
-        </h2>
-        <p className="text-xl leading-relaxed" style={{ color: "var(--color-text-sub)" }}>
-          College baseball programs are making six-figure roster decisions
-          on gut feel, film, and word of mouth. The transfer window moves fast
-          and the top players are off the board before the manual process
-          catches up.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function Features() {
-  return (
-    <section className="py-28 section-divider theme-bg" id="features">
+    <section className="py-24 section-divider" style={{ background: "var(--color-bg-mid)" }} id="features">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <h2 className="font-heading text-5xl sm:text-6xl font-bold mb-6">
             Everything your staff needs.{" "}
             <span className="gold-gradient">Nothing it doesn't.</span>
           </h2>
-          <p className="text-xl max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
+          <p className="text-xl max-w-2xl mx-auto text-balance" style={{ color: "var(--color-text-muted)" }}>
             Built by coaches and data engineers who know what D1 programs
             actually need to make faster, smarter roster decisions.
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FEATURES.map((f) => (
-            <div
-              key={f.title}
-              className="card-border rounded-lg p-7 hover:border-gold/35 transition-colors duration-300 group"
-            >
-              <div className="flex items-start mb-5">
-                <div className="w-12 h-12 rounded bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors duration-300">
-                  <f.icon size={22} className="text-gold" />
-                </div>
-              </div>
-              <h3 className="font-heading text-2xl font-semibold mb-3 tracking-wide">
-                {f.title}
-              </h3>
-              <p className="text-base leading-relaxed" style={{ color: "var(--color-text-muted)" }}>{f.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function MetricsBar() {
-  return (
-    <section className="py-20 section-divider" style={{ background: "var(--color-bg-mid)" }}>
-      <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {METRICS.map((m) => (
             <div key={m.label} className="text-center">
@@ -426,7 +400,7 @@ function HowItWorks() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <h2 className="font-heading text-5xl sm:text-6xl font-bold mb-6">
-            Up and running before your next recruiting call.
+            Up and running before your next practice.
           </h2>
           <p className="text-xl max-w-xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
             Three steps. No onboarding calls with your data team. No
@@ -438,11 +412,11 @@ function HowItWorks() {
           {HOW_IT_WORKS.map((item, i) => (
             <div key={item.step} className="relative">
               <div className="flex items-center gap-4 mb-5">
-                <span className="font-heading text-6xl font-bold leading-none" style={{ color: "rgba(212,175,55,0.2)" }}>
+                <span className="font-heading text-6xl font-bold leading-none" style={{ color: "var(--color-gold)" }}>
                   {item.step}
                 </span>
                 {i < HOW_IT_WORKS.length - 1 && (
-                  <div className="hidden md:block absolute top-7 left-full w-full h-px bg-gradient-to-r from-gold/20 to-transparent -translate-x-4" />
+                  <div className="hidden md:block absolute top-7 left-full w-full h-px bg-gradient-to-r from-gold/50 to-transparent -translate-x-4" />
                 )}
               </div>
               <h3 className="font-heading text-2xl font-semibold mb-3 tracking-wide">
@@ -459,13 +433,14 @@ function HowItWorks() {
 
 function WhatYouGet() {
   const bullets = [
-    "Full D1 + JUCO database — 15,000+ hitters and pitchers tracked",
-    "Every projected hitter and pitcher stat your staff cares about (oWAR, pWAR, pWRC+, pRV+, and the full slash line)",
-    "Market valuation by conference tier, position, and depth role",
-    "Transfer projections with handedness-aware park factors and JUCO district weights",
-    "2025 championship benchmarks for Team Builder (national + all conferences)",
+    "Every player projected for your program",
+    "Every projected hitter and pitcher stat your staff cares about, including the full slash line",
     "Daily portal updates with contact info, watchlists, and a prioritized activity feed",
-    "PDF scouting reports with your program's numbers baked in",
+    "Freshman recruiting board shared across your staff",
+    "Development plans with lab-level pitching and hitting insights",
+    "Post-game reports after every game",
+    "Team Builder with 2025 championship benchmarks (national + all conferences)",
+    "Financial management organized by source",
   ];
 
   return (
@@ -478,10 +453,9 @@ function WhatYouGet() {
               <span className="gold-gradient">actually needs.</span>
             </h2>
             <p className="text-xl leading-relaxed mb-8" style={{ color: "var(--color-text-sub)" }}>
-              Every projection accounts for your park, your conference, and
-              your program's market tier. SEC programs see SEC pricing. Mid
-              majors see mid major pricing. Same player — the right number
-              for you.
+              Every projection is built for your program, not a national
+              average. Same player, the right number for you, whether you're
+              recruiting him, developing him, or building around him.
             </p>
             <a
               href="#contact"
@@ -511,8 +485,17 @@ function ContactSection() {
     email: "",
     program: "",
     role: "",
-    message: "",
+    interests: [] as string[],
+    notes: "",
   });
+
+  const toggleInterest = (title: string) =>
+    setForm((f) => ({
+      ...f,
+      interests: f.interests.includes(title)
+        ? f.interests.filter((t) => t !== title)
+        : [...f.interests, title],
+    }));
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -521,11 +504,11 @@ function ContactSection() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, interests: form.interests.join(", ") }),
       });
       if (res.ok) {
         setStatus("sent");
-        setForm({ name: "", email: "", program: "", role: "", message: "" });
+        setForm({ name: "", email: "", program: "", role: "", interests: [], notes: "" });
       } else {
         setStatus("error");
       }
@@ -632,14 +615,42 @@ function ContactSection() {
                     </div>
                   </div>
                   <div>
+                    <label className="block text-sm mb-1 tracking-wide uppercase" style={{ color: "var(--color-text-muted)" }}>
+                      What are you interested in?
+                    </label>
+                    <p className="text-sm mb-3" style={{ color: "var(--color-text-muted)" }}>
+                      Select all that apply.
+                    </p>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {WORKFLOW_GROUPS.flatMap((g) => g.items).map((item) => {
+                        const selected = form.interests.includes(item.title);
+                        return (
+                          <button
+                            key={item.title}
+                            type="button"
+                            aria-pressed={selected}
+                            onClick={() => toggleInterest(item.title)}
+                            className={`relative flex items-center justify-center text-center text-sm leading-tight px-3 sm:px-2 sm:whitespace-nowrap py-2.5 min-h-[44px] rounded border transition-colors duration-200 ${
+                              selected
+                                ? "bg-navy text-white border-navy"
+                                : "border-navy/20 text-navy hover:border-gold-dark hover:text-gold-dark"
+                            }`}
+                          >
+                                                        {item.title}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div>
                     <label className="block text-sm mb-2 tracking-wide uppercase" style={{ color: "var(--color-text-muted)" }}>
-                      Anything specific you want to see?
+                      Notes <span className="normal-case tracking-normal">(optional)</span>
                     </label>
                     <textarea
-                      rows={4}
-                      placeholder="Transfer portal targets, market valuations, team building scenarios..."
-                      value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      rows={3}
+                      placeholder="Anything else we should know about your program?"
+                      value={form.notes}
+                      onChange={(e) => setForm({ ...form, notes: e.target.value })}
                       className={`${inputClass} resize-none`} style={inputStyle}
                     />
                   </div>
@@ -732,33 +743,34 @@ function ContactSection() {
 }
 
 function Footer() {
+  const link = "text-white/70 hover:text-gold transition-colors duration-200";
   return (
-    <footer className="border-t py-10" style={{ background: "#0d1b3e", borderColor: "rgba(160,136,32,0.2)" }}>
-      <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <img src="/rstr-iq-logo.png" alt="RSTR IQ" className="h-6 w-auto" />
-          <span className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-            Roster Intelligence for College Baseball
-          </span>
+    <footer className="bg-navy border-t border-gold/20">
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="flex items-center gap-5">
+            <img src="/rstr-iq-logo-trim.png" alt="RSTR IQ" className="h-12 w-auto" />
+            <p className="hidden lg:block text-sm text-white/60 pl-5 border-l border-white/15">Roster Intelligence for College Baseball</p>
+          </div>
+          <nav className="flex flex-wrap gap-x-8 gap-y-3 text-sm font-medium tracking-wide">
+            <a href="#platform" className={link}>Platform</a>
+            <a href="#how-it-works" className={link}>How It Works</a>
+            <a href="#contact" className={link}>Contact</a>
+            <a href={APP_URL} target="_blank" rel="noopener noreferrer" className={`${link} inline-flex items-center gap-1`}>
+              Access the App <ExternalLink size={12} />
+            </a>
+          </nav>
         </div>
-        <div className="flex items-center gap-6 text-sm" style={{ color: "var(--color-text-muted)" }}>
-          <a href="#features" className="transition-colors duration-200 hover:text-gold-dark underline-offset-4 hover:underline hover:decoration-gold-dark">Features</a>
-          <a href="#how-it-works" className="transition-colors duration-200 hover:text-gold-dark underline-offset-4 hover:underline hover:decoration-gold-dark">How It Works</a>
-          <a href="#contact" className="transition-colors duration-200 hover:text-gold-dark underline-offset-4 hover:underline hover:decoration-gold-dark">Contact</a>
-          <a
-            href={APP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors duration-200 hover:text-gold-dark flex items-center gap-1"
-          >
-            App <ExternalLink size={11} />
-          </a>
+        <div className="mt-6 pt-5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/50">
+          <p>© {new Date().getFullYear()} RSTR IQ. All rights reserved.</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {[CONTACT.peyton, CONTACT.trevor].map((c) => (
+              <a key={c.email} href={`mailto:${c.email}`} className="hover:text-gold transition-colors duration-200">
+                {c.email}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-6 mt-6 pt-6 border-t border-white/5">
-        <p className="text-center text-xs" style={{ color: "var(--color-text-muted)" }}>
-          © {new Date().getFullYear()} RSTR IQ. All rights reserved.
-        </p>
       </div>
     </footer>
   );
@@ -771,9 +783,7 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
-        <ScreenshotCarousel />
-        <Problem />
-        <Features />
+        <Workflows />
         <MetricsBar />
         <HowItWorks />
         <WhatYouGet />
