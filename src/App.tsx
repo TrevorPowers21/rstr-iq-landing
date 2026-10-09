@@ -321,10 +321,9 @@ function Hero() {
         </div>
 
         <p className="text-xl sm:text-2xl max-w-3xl mx-auto mb-14 leading-relaxed text-balance" style={{ color: "var(--color-text-sub)" }}>
-          Data-driven projections to find the best players for your program,
-          market valuations so every dollar goes to the right player, and
-          player development tools to help them reach their ceiling. All in
-          one interface.
+          Data-driven projections to find the best players for your program
+          and player development tools to help them reach their ceiling. All
+          in one interface.
         </p>
 
         <div>
@@ -375,8 +374,9 @@ function MetricsBar() {
             <span className="gold-gradient">Nothing it doesn't.</span>
           </h2>
           <p className="text-xl max-w-2xl mx-auto text-balance" style={{ color: "var(--color-text-muted)" }}>
-            Built by coaches and data engineers who know what D1 programs
-            actually need to make faster, smarter roster decisions.
+            Built by coaches, data science, and technical engineers who know
+            what D1 programs actually need to make faster, smarter roster
+            decisions.
           </p>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -399,13 +399,9 @@ function HowItWorks() {
     <section className="py-28 section-divider" id="how-it-works">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="font-heading text-5xl sm:text-6xl font-bold mb-6">
+          <h2 className="font-heading text-5xl sm:text-6xl font-bold">
             Up and running before your next practice.
           </h2>
-          <p className="text-xl max-w-xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
-            Three steps. No onboarding calls with your data team. No
-            spreadsheet imports. Data that's ready when you are.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
