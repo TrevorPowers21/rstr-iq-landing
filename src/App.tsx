@@ -435,7 +435,7 @@ function WhatYouGet() {
     "Freshman recruiting board shared across your staff",
     "Development plans with lab-level pitching and hitting insights",
     "Post-game reports after every game",
-    "Team Builder with 2025 championship benchmarks (national + all conferences)",
+    "Team Builder with championship benchmarks (national + all conferences)",
     "Financial management organized by source",
   ];
 
