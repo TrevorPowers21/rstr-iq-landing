@@ -71,9 +71,9 @@ const WORKFLOW_GROUPS = [
         description:
           "Every player projected and valued at your program, sortable by any stat.",
         bullets: [
-          "Projections precomputed for your park and conference",
-          "Hitters and pitchers ranked for your program",
-          "Projected stats for every hitter and pitcher",
+          "Projections precomputed for your program and conference",
+          "Players ranked by position for your program",
+          "Projected stats for every player",
         ],
       },
       {
@@ -130,10 +130,10 @@ const WORKFLOW_GROUPS = [
         icon: ClipboardList,
         title: "Post-Game Reports",
         description:
-          "Every game broken down pitch by pitch, ready for your staff the next morning.",
+          "Every game broken down play by play, ready for your staff the next morning.",
         bullets: [
           "Game log and scoreboard for every game",
-          "Hitter and pitcher breakdowns",
+          "Breakdowns for every player and position group",
           "Coach and player reports ready to export",
         ],
       },
@@ -141,10 +141,10 @@ const WORKFLOW_GROUPS = [
         icon: Target,
         title: "Lab-Level Insights",
         description:
-          "Lab-level breakdowns for every pitcher and hitter, showing exactly where each player can get better.",
+          "Lab-level breakdowns for every player, showing exactly where each one can get better.",
         bullets: [
-          "Pitch shape and arsenal breakdowns",
-          "Swing decisions and batted-ball quality",
+          "Skill and performance breakdowns",
+          "Decision-making and execution quality",
           "Trends over time against D1 benchmarks",
         ],
       },
@@ -170,11 +170,11 @@ const WORKFLOW_GROUPS = [
         icon: FileText,
         title: "Scouting Reports",
         description:
-          "Prepare for every opponent with reports on their lineup and pitching staff.",
+          "Prepare for every opponent with reports on their personnel and tendencies.",
         bullets: [
-          "Opponent lineup and pitching staff breakdowns",
+          "Opponent personnel and tendency breakdowns",
           "Built for your staff and your players",
-          "Ready to export before every series",
+          "Ready to export before every game",
         ],
       },
     ],
@@ -193,7 +193,7 @@ function Workflows() {
             Roster decisions don't have time to wait on a spreadsheet.
           </h2>
           <p className="text-xl leading-relaxed text-balance" style={{ color: "var(--color-text-sub)" }}>
-            College baseball programs are making six-figure roster decisions
+            College programs are making six-figure roster decisions
             on gut feel, film, and word of mouth. Who to chase, how to develop
             them, and building a roster that wins. The decisions never stop,
             and the best programs make them fastest.
@@ -309,7 +309,7 @@ function Hero() {
         <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-10" style={{ color: "var(--color-text)" }}>
           The Roster Intelligence Platform
           <br />
-          <span className="gold-gradient">Built for College Baseball</span>
+          <span className="gold-gradient">Built for College Athletics</span>
         </h1>
 
         <div className="flex items-center justify-center gap-3 sm:gap-6 mb-6">
@@ -430,10 +430,10 @@ function HowItWorks() {
 function WhatYouGet() {
   const bullets = [
     "Every player projected for your program",
-    "Every projected hitter and pitcher stat your staff cares about, including the full slash line",
+    "Every projected stat your staff cares about, for every position",
     "Daily portal updates with contact info, watchlists, and a prioritized activity feed",
     "Freshman recruiting board shared across your staff",
-    "Development plans with lab-level pitching and hitting insights",
+    "Development plans with lab-level insights",
     "Post-game reports after every game",
     "Team Builder with championship benchmarks (national + all conferences)",
     "Financial management organized by source",
@@ -451,7 +451,7 @@ function WhatYouGet() {
             <p className="text-xl leading-relaxed mb-8" style={{ color: "var(--color-text-sub)" }}>
               Every projection is built for your program, not a national
               average. Same player, the right number for you, whether you're
-              recruiting him, developing him, or building around him.
+              recruiting them, developing them, or building around them.
             </p>
             <a
               href="#contact"
@@ -746,7 +746,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="flex items-center gap-5">
             <img src="/rstr-iq-logo-trim.png" alt="RSTR IQ" className="h-12 w-auto" />
-            <p className="hidden lg:block text-sm text-white/60 pl-5 border-l border-white/15">Roster Intelligence for College Baseball</p>
+            <p className="hidden lg:block text-sm text-white/60 pl-5 border-l border-white/15">Roster Intelligence for College Athletics</p>
           </div>
           <nav className="flex flex-wrap gap-x-8 gap-y-3 text-sm font-medium tracking-wide">
             <a href="#platform" className={link}>Platform</a>
